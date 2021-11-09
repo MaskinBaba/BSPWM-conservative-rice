@@ -1,0 +1,39 @@
+#! /bin/sh
+
+# --- MONITOR CONFIGURATION --- #
+
+bspc monitor -d terminal browser vscode browser2 terminal2 vidrelated games misc1 misc2 discord
+
+
+# --- Autostart programs --- #
+# nitrogen --restore &			# Restores and loads the wallpaper
+xsetroot -cursor_name left_ptr		# To stop making cursor getting crossed 'X'
+
+killall sxhkd
+pgrep -x sxhkd > /dev/null || sxhkd &	# Launches sxhkd
+
+picom &					# Compositor
+$HOME/.config/polybar/launch.sh		# Launches Polybar panel
+
+dunst &					# Notification daemon
+lxpolkit &				# Authentication agent
+
+
+# --- MONITOR --- #
+# bspc monitor -d I II III IV V VI VII VIII IX X
+
+# --- BSPWM configuration --- #
+bspc config border_width         1
+bspc config window_gap           6
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc rule -a Gimp state=floating follow=on
+# bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^4'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a discord desktop='^10'
